@@ -14,6 +14,6 @@ def auth_url():
     return "https://restful-booker.herokuapp.com/auth"
 
 
-def other_url(booking_id):
-    return "https://restful-booker.herokuapp.com/" + "/" + str(booking_id)
+def put_url():
+    return "https://restful-booker.herokuapp.com/"  # "/" + str(booking_id)
 # you can also make above urls(only constant/foxed one) in class by creating class(self) and use @staticmethod before every method

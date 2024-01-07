@@ -10,6 +10,7 @@ from src.constants.api_constants import other_url
 import openpyxl
 import requests
 import pytest
+import json
 
 
 # first read the file data i.e usernames and password
@@ -20,7 +21,7 @@ def read_credentials(file_path):
     sheet = workbook.active
 
     for row in sheet.iter_rows(min_row=2, values_only=True):
-        username,password = row
+        username, password = row
         credentials.append({"username": username, "password": password})
         return credentials
 
@@ -35,13 +36,9 @@ def make_request_auth(username, password):
     return response
 
 
-def test_create_token_3times():
-    file_path = "datafile.xlsx"
-    credentials = read_credentials(file_path)
-
-    for user_cred in credentials:
-        username = user_cred["username"]
-        password = user_cred["password"]
-        print(username, password)
-        response = make_request_auth(username, password)
-        print(response)
+@pytest.mark.parametrize("user_cred", read_credentials("datafile.xlsx"))
+def test_create_token_3times(user_cred, make):
+    username = user_cred["username"]
+    password = user_cred["password"]
+    response = make.request_auth(username, password)
+    assert response.status_code == 200

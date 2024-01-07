@@ -8,7 +8,7 @@ def payload_auth():
     }
     return payload
 
-def payload_create():
+def payload_create():  # or use faker.firstname for random data
     payload = {
         "firstname": "sik",
         "lastname": "tyagi",

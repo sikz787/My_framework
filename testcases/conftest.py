@@ -8,10 +8,10 @@ from src.helpers.utilities import common_headers, common_for_update
 from src.helpers.payload_manager import payload_create
 from src.helpers.payload_manager import payload_auth
 from src.helpers.common_verficiations import verify_response, verify_status
-from src.constants.api_constants import other_url
+from src.constants.api_constants import put_url
 
 
-@pytest.fixture(scope="method")
+@pytest.fixture(scope="class")
 def token(self):
     response = post_request(url=auth_url(), auth=None, headers=common_headers(), payload=payload_auth(),
                             in_json=False)
@@ -22,7 +22,7 @@ def token(self):
     return token_crud
 
 
-@pytest.fixture(scope="method")
+@pytest.fixture(scope="class")
 def create_booking1(self):
     response = post_request(url=create_url(), auth=None, headers=common_headers(), payload=payload_create(),
                             in_json=False)

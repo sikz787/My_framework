@@ -27,12 +27,12 @@ class TestCreateBooking(object):
     @pytest.mark.positive
     # no payload, try with None 400, if blank then 500
     def test_create_booking2(self):
-        response = post_request(url=create_url(), auth=None, headers=common_headers(), payload=None, in_json=False)
+        response = post_request(url=create_url(), auth=None, headers=common_headers(), payload=payload_create(), in_json=False)
         print(response)
         # verify_response(response.json()["bookingid"])
-        verify_status(response, 400)
-        # booking_id = (response.json()["bookingid"])
-        # print(booking_id)
+        verify_status(response, 200)
+        booking_id = (response.json()["bookingid"])
+        print(booking_id)
 
     @pytest.mark.positive
     # no payload, try with None 400, if blank {} then 500
